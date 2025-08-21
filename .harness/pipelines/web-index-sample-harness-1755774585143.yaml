@@ -13,23 +13,44 @@ pipeline:
     - stage:
         identifier: build
         name: build
+        type: CI
         spec:
+          cloneCodebase: true
           caching:
             enabled: true
-          cloneCodebase: true
           execution:
             steps:
               - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    command: echo hello world
-                  timeout: ""
+                  name: Install Apache
+                  identifier: install_apache
                   type: Run
+                  spec:
+                    shell: Sh
+                    command: |
+                      apt-get update -y
+                      apt-get install -y apache2
+              - step:
+                  name: Copy index.html
+                  identifier: copy_index
+                  type: Run
+                  spec:
+                    shell: Sh
+                    command: |
+                      cp index.html /var/www/html/index.html
+                      echo "Deployment done!"
+              - step:
+                  name: Start Apache
+                  identifier: start_apache
+                  type: Run
+                  spec:
+                    shell: Sh
+                    command: |
+                      service apache2 start
+                      echo "Apache started. Testing..."
+                      curl http://localhost/
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Docker
-        type: CI
+            spec: {}
