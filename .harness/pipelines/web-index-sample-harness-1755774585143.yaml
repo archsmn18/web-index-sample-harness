@@ -1,0 +1,35 @@
+pipeline:
+  identifier: Build_archsmn18_web_index_sample_harness_1755774781298
+  name: Build web-index-sample-harness
+  orgIdentifier: default
+  projectIdentifier: webpagedeployment
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github
+        repoName: archsmn18/web-index-sample-harness
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Docker
+        type: CI
