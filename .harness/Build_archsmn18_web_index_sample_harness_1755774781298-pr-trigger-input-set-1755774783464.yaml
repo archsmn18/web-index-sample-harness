@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_archsmn18_web_index_sample_harness_1755774781298-pr-trigger-input-set
+  identifier: Build_archsmn18_web_index_sample_harness_1755774781298prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: webpagedeployment
+  pipeline:
+    identifier: Build_archsmn18_web_index_sample_harness_1755774781298
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
