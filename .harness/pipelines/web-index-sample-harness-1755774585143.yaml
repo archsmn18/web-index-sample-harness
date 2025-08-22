@@ -48,6 +48,9 @@ pipeline:
                       service apache2 start
                       echo "Apache started. Testing..."
                       curl http://localhost/
+                  platform:
+                    os: linuzx
+                    arch: Amd64
           runtime:
             type: Docker
             spec: {}
